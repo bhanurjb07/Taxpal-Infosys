@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { API } from "../api";
+import { API } from "./api";
 
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
