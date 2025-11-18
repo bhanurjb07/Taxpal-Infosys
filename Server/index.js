@@ -17,7 +17,7 @@ const app = express();
 
 app.use(cors({
   origin: [
-    "https://taxpal-infosys.vercel.app",   // Vercel frontend
+    "https://taxpal-infosys.vercel.app",   // Vercel frontend d
     "http://localhost:5173"               
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
