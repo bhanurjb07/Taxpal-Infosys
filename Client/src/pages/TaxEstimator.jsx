@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { FaUniversity, FaReceipt, FaTimes } from "react-icons/fa";
 import { FiPercent } from "react-icons/fi";
 import { BsFillFileEarmarkTextFill } from "react-icons/bs";
+import { API } from "../api";
 
-// ================= Tax Calculation Functions =================
+//tax estimationn
 function calculateIndiaTax(income) {
   if (income <= 300000) return 0;
   if (income <= 600000) return (income - 300000) * 0.05;
@@ -48,7 +49,7 @@ function calculateTax(region, income) {
   }
 }
 
-// ================= Component =================
+
 export default function TaxEstimator() {
   const [region, setRegion] = useState("India");
   const [status, setStatus] = useState("Single");
@@ -68,21 +69,19 @@ export default function TaxEstimator() {
 
   const token = localStorage.getItem("token");
 
-  // ✅ Re-fetch records when user clicks "Record"
   const handleRecord = async () => {
     if (!token) {
       setNotification({ type: "error", message: "User not authenticated" });
       return;
     }
     try {
-      const res = await fetch("http://localhost:5001/taxRoutes", {
+      const res = await fetch(`${API}/taxRoutes`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) throw new Error("Failed to fetch records");
       const data = await res.json();
-      // ✅ Check if there is at least one record in DB
       if (Array.isArray(data) && data.length > 0) {
-        setExistingRecord(data[0]); // store the first existing record
+        setExistingRecord(data[0]); 
         setShowEditModal(true);
         return;
       }
@@ -107,8 +106,8 @@ export default function TaxEstimator() {
       };
 
       const url = update && existingRecord?._id
-        ? `http://localhost:5001/taxRoutes/${existingRecord._id}`
-        : "http://localhost:5001/taxRoutes";
+        ? `${API}/taxRoutes/${existingRecord._id}`
+        : `${API}/taxRoutes`;
       const method = update ? "PUT" : "POST";
 
       const response = await fetch(url, {
@@ -321,7 +320,7 @@ export default function TaxEstimator() {
   );
 }
 
-// Reusable card
+// Reusabl
 function SummaryCard({ icon, title, value, subtitle }) {
   return (
     <div className="bg-white p-6 rounded-xl shadow-md flex flex-col items-start">

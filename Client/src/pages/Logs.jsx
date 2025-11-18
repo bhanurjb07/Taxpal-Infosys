@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { API } from "../api";
 
 const EditIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-500 hover:text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -151,7 +152,7 @@ export default function Logs() {
     try {
       const token = localStorage.getItem("token");
       if (!token) return;
-      const response = await fetch("http://localhost:5001/transactions", {
+      const response = await fetch(`${API}/transactions`, {
         method: "GET",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       });
@@ -169,7 +170,7 @@ export default function Logs() {
     if (!deleteConfirm) return;
     try {
       const token = localStorage.getItem("token");
-      await fetch(`http://localhost:5001/transactions/${deleteConfirm._id}`, {
+      await fetch(`${API}/transactions/${deleteConfirm._id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
       });
@@ -183,7 +184,7 @@ export default function Logs() {
   const saveEdit = async () => {
     try {
       const token = localStorage.getItem("token");
-      await fetch(`http://localhost:5001/transactions/${editTransaction._id}`, {
+      await fetch(`${API}/transactions/${editTransaction._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify(editTransaction),

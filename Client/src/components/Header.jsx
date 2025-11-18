@@ -135,7 +135,7 @@ export default function Header({ isAuthenticated, onLogout }) {
               <button
                 onClick={() => {
                   setShowLogoutModal(false);
-                  onLogout(); // Call logout function
+                  onLogout(); // Calling logout function
                 }}
                 className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
               >

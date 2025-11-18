@@ -4,6 +4,7 @@ import ExpenseChart from "../components/ExpenseChart";
 import FinancialTrendsChart from "../components/FinancialTrendsChart";
 import { FaDollarSign, FaRegCalendarAlt } from "react-icons/fa";
 import { FiPercent } from "react-icons/fi";
+import { API } from "../api";
 
 const Dashboard = () => {
   const [transactions, setTransactions] = useState([]);
@@ -13,7 +14,7 @@ const Dashboard = () => {
     const fetchTransactions = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await fetch("http://localhost:5001/transactions", {
+        const res = await fetch(`${API}/transactions`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -57,11 +58,11 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
         <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-md">
           <h2 className="text-xl font-semibold text-gray-700 mb-4">Expense Categories</h2>
-          <ExpenseChart transactions={transactions} /> {/* ✅ pass data */}
+          <ExpenseChart transactions={transactions} /> 
         </div>
         <div className="lg:col-span-3 bg-white p-6 rounded-xl shadow-md">
           <h2 className="text-xl font-semibold text-gray-700 mb-4">Financial Trends</h2>
-          <FinancialTrendsChart transactions={transactions} /> {/* ✅ pass data */}
+          <FinancialTrendsChart transactions={transactions} /> 
         </div>
       </div>
     </div>

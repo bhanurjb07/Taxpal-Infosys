@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { API } from "../api";
 
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
@@ -103,7 +103,7 @@ export default function App() {
       const token = localStorage.getItem("token");
 
       try {
-        await fetch("http://localhost:5001/transactions", {
+        await fetch(`${API}/transactions`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

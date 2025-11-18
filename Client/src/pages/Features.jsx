@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { CreditCard, BarChart2, Globe } from "lucide-react";
+import { API } from "../api";
 
 const features = [
   {
@@ -41,7 +42,7 @@ export default function Features() {
         ))}
       </div>
 
-      {/*  Back to Login button */}
+      {/*  Back to Login btn */}
       <div className="text-center mt-12">
         <button
           onClick={() => navigate("/")}

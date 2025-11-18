@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Eye, EyeOff } from "lucide-react";
+import { API } from "../api";
 
 export default function Login({ setIsAuthenticated }) {
   const [email, setEmail] = useState("");
@@ -13,7 +14,7 @@ export default function Login({ setIsAuthenticated }) {
     e.preventDefault();
     setError("");
     try {
-      const res = await fetch("http://localhost:5001/auth/login", {
+      const res = await fetch(`${API}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

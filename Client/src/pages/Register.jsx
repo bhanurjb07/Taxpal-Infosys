@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Eye, EyeOff } from "lucide-react";
+import { API } from "../api";
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -29,7 +30,7 @@ export default function Register() {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5001/auth/register", {
+      const res = await fetch(`${API}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { FaUser, FaBell, FaList, FaEdit, FaTimes, FaEye, FaEyeSlash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { User, Mail, Globe, DollarSign } from "lucide-react";
+import { API } from "../api";
 
 
 function ProfileSection() {
@@ -25,7 +26,7 @@ function ProfileSection() {
       }
 
       try {
-        const res = await fetch("http://localhost:5001/api/user/profile", {
+        const res = await fetch(`${API}/api/user/profile`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`, 
@@ -62,7 +63,7 @@ function ProfileSection() {
     }
 
     try {
-      const res = await fetch("http://localhost:5001/api/user/profile", {
+      const res = await fetch(`${API}/api/user/profile`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -182,7 +183,7 @@ function NotificationsSection() {
       if (!token) return;
 
       try {
-        const res = await fetch("http://localhost:5001/api/user/profile", {
+        const res = await fetch(`${API}/api/user/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -206,7 +207,7 @@ function NotificationsSection() {
     if (!token) return;
 
     try {
-      const res = await fetch("http://localhost:5001/api/user/notifications", {
+      const res = await fetch(`${API}/api/user/notifications`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

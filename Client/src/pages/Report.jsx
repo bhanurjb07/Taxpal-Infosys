@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { API } from "../api";
 import { FileText, FileSpreadsheet, ClipboardList, X, TrendingUp, BarChart3 } from "lucide-react";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
@@ -35,20 +36,20 @@ export default function Report() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // 🔹 Fiers
+  // Fiers
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedQuarter, setSelectedQuarter] = useState("");
 
-  // 🔹 Backend Data
+  //  Backend Dat
   const [financialData, setFinancialData] = useState([]);
   const [quarterlyData, setQuarterlyData] = useState([]);
 
-  // 🔹 Fetch data from backend (MongoDB API)
+  //  data from  MongoDB API
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     // Monthl
-    fetch("http://localhost:5001/api/reports/monthly", {
+    fetch(`${API}/api/reports/monthly`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
@@ -59,7 +60,7 @@ export default function Report() {
       });
 
     // Quaterly
-    fetch("http://localhost:5001/api/reports/quarterly", {
+    fetch(`${API}/api/reports/quarterly`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())

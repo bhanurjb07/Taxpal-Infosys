@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { API } from "../api";
 
 export default function Forgot() {
   const nav = useNavigate();
@@ -12,7 +13,7 @@ export default function Forgot() {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5001/auth/forgot-password", {
+      const res = await fetch(`${API}/auth/forgot-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

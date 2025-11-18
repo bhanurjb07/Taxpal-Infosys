@@ -8,7 +8,7 @@ const ExpenseChart = ({ transactions }) => {
   // Only expenses
   const expenses = transactions.filter((t) => t.type === "Expense");
 
-  // Group by category
+  // Group category
   const dataByCategory = expenses.reduce((acc, curr) => {
     acc[curr.category] = (acc[curr.category] || 0) + curr.amount;
     return acc;
@@ -18,17 +18,17 @@ const ExpenseChart = ({ transactions }) => {
   const amounts = Object.values(dataByCategory);
   const total = amounts.reduce((a, b) => a + b, 0);
 
-  // Calculate percentages
+  // Calculate perce
   const percentages = amounts.map((amt) =>
-    ((amt / total) * 100).toFixed(0) // round to whole %
+    ((amt / total) * 100).toFixed(0) 
   );
 
   const colors = [
-    "#36A2EB", // Rent/Mortgage
-    "#4BC0C0", // Business
-    "#FFCD56", // Utilities
-    "#FF6384", // Food
-    "#9966FF", // Other
+    "#36A2EB", 
+    "#4BC0C0", 
+    "#FFCD56", 
+    "#FF6384", 
+    "#9966FF", 
   ];
 
   const data = {

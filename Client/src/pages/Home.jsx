@@ -1,4 +1,5 @@
 import Button  from "@/components/Button";
+import { API } from "../api";
 
 
 export default function Home() {

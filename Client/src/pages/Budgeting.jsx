@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { PlusCircle, Trash } from "lucide-react";
+import { API } from "../api";
 
 export default function Budgets() {
   const [budgets, setBudgets] = useState([]);
@@ -20,7 +21,7 @@ export default function Budgets() {
         if (!token) return;
 
 
-        const res = await fetch("http://localhost:5001/budgets", {
+        const res = await fetch(`${API}/budgets`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (!res.ok) throw new Error("Failed to fetch budgets");
@@ -28,7 +29,7 @@ export default function Budgets() {
         setBudgets(data);
 
 
-        const healthRes = await fetch("http://localhost:5001/budgets/check", {
+        const healthRes = await fetch(`${API}/budgets/check`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (healthRes.ok) {
@@ -64,7 +65,7 @@ export default function Budgets() {
     };
 
     try {
-      const res = await fetch("http://localhost:5001/budgets", {
+      const res = await fetch(`${API}/budgets`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify(newBudget),
@@ -92,7 +93,7 @@ export default function Budgets() {
       const token = localStorage.getItem("token");
       if (!token) return;
 
-      await fetch(`http://localhost:5001/budgets/${id}`, {
+      await fetch(`${API}/budgets/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
